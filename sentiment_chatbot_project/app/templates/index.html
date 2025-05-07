@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentiment Analysis & Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        textarea, input {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        #sentimentResult, #chatResponse {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sentiment Analysis & Chatbot</h1>
+    <div>
+        <h2>Sentiment Analysis</h2>
+        <textarea id="sentimentInput" rows="4" placeholder="Enter a review..."></textarea>
+        <button onclick="analyzeSentiment()">Analyze</button>
+        <p id="sentimentResult"></p>
+    </div>
+    <div>
+        <h2>Chatbot</h2>
+        <input id="chatInput" type="text" placeholder="Type your message...">
+        <button onclick="sendChat()">Send</button>
+        <p id="chatResponse"></p>
+    </div>
+    <script>
+        async function analyzeSentiment() {
+            const text = document.getElementById('sentimentInput').value;
+            if (!text) {
+                document.getElementById('sentimentResult').innerText = 'Please enter a review.';
+                return;
+            }
+            try {
+                const response = await fetch('/api/sentiment', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({text})
+                });
+                const data = await response.json();
+                if (data.error) {
+                    document.getElementById('sentimentResult').innerText = `Error: ${data.error}`;
+                } else {
+                    document.getElementById('sentimentResult').innerText = `Sentiment: ${data.sentiment}`;
+                }
+            } catch (error) {
+                document.getElementById('sentimentResult').innerText = 'Error: Failed to connect to server.';
+            }
+        }
+
+        async function sendChat() {
+            const text = document.getElementById('chatInput').value;
+            if (!text) {
+                document.getElementById('chatResponse').innerText = 'Please enter a message.';
+                return;
+            }
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({text})
+                });
+                const data = await response.json();
+                if (data.error) {
+                    document.getElementById('chatResponse').innerText = `Error: ${data.error}`;
+                } else {
+                    document.getElementById('chatResponse').innerText = `Bot: ${data.response}`;
+                }
+                document.getElementById('chatInput').value = '';
+            } catch (error) {
+                document.getElementById('chatResponse').innerText = 'Error: Failed to connect to server.';
+            }
+        }
+    </script>
+</body>
+</html>
