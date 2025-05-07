@@ -1,71 +1,59 @@
-import tensorflow as tf
-from tensorflow.keras.models import Sequential, load_model
-from tensorflow.keras.layers import Embedding, LSTM, Dense
-import os
+from tensorflow.keras.models import load_model, Sequential
+from tensorflow.keras.layers import Embedding, LSTM, Dense, Dropout
+import pickle
+import numpy as np
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-def build_model(vocab_size, embedding_dim=100, lstm_units=128, max_len=100):
+# Load the saved model and tokenizer
+model = load_model('data/trained_model/sentiment_model.h5')
+with open('data/trained_model/tokenizer.pkl', 'rb') as f:
+    tokenizer = pickle.load(f)
+
+def build_model(vocab_size, embedding_dim=100, max_length=100, lstm_units=64):
     """
-    Build and compile an LSTM-based neural network for sentiment analysis.
+    Build the sentiment analysis model.
     
     Args:
-        vocab_size (int): Size of the vocabulary for the embedding layer
-        embedding_dim (int): Dimension of the embedding vectors
-        lstm_units (int): Number of LSTM units
-        max_len (int): Maximum length of input sequences
+        vocab_size (int): Size of the vocabulary
+        embedding_dim (int): Dimension of the embedding layer
+        max_length (int): Maximum length of input sequences
+        lstm_units (int): Number of units in the LSTM layer
     
     Returns:
-        tf.keras.Model: Compiled LSTM model
+        tensorflow.keras.Model: Compiled model
     """
     model = Sequential([
-        Embedding(vocab_size, embedding_dim, input_length=max_len),
-        LSTM(lstm_units, return_sequences=False),
-        Dense(64, activation='relu'),
-        Dense(3, activation='softmax')  # 3 classes: positive, negative, neutral
+        Embedding(vocab_size, embedding_dim, input_length=max_length),
+        LSTM(lstm_units, return_sequences=True),
+        Dropout(0.2),
+        LSTM(lstm_units // 2),
+        Dropout(0.2),
+        Dense(16, activation='relu'),
+        Dropout(0.2),
+        Dense(1, activation='sigmoid')
     ])
-    model.compile(optimizer='adam', 
-                  loss='sparse_categorical_crossentropy', 
-                  metrics=['accuracy'])
+    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
 
-def load_trained_model(model_path='data/trained_model/sentiment_model.h5'):
+def predict_sentiment(text, max_length=100):
     """
-    Load a pre-trained sentiment model.
+    Predict the sentiment of the input text.
     
     Args:
-        model_path (str): Path to the saved model
+        text (str): Input text to analyze
+        max_length (int): Maximum length of sequences
     
     Returns:
-        tf.keras.Model: Loaded model
+        str: Predicted sentiment ('positive', 'negative', or 'neutral')
     """
-    if not os.path.exists(model_path):
-        raise FileNotFoundError(f"Model file not found at {model_path}")
-    return load_model(model_path)
-
-def predict_sentiment(text, tokenizer=None, model_path='data/trained_model/sentiment_model.h5', max_len=100):
-    """
-    Predict sentiment for a given text input.
-    
-    Args:
-        text (str): Input text to classify
-        tokenizer: Tokenizer fitted on training data
-        model_path (str): Path to the trained model
-        max_len (int): Maximum length of input sequences
-    
-    Returns:
-        str: Predicted sentiment ('positive', 'negative', 'neutral')
-    """
-    model = load_trained_model(model_path)
-    
-    # Preprocess the input text
     if tokenizer is None:
         raise ValueError("Tokenizer is required for prediction")
     
+    # Tokenize and pad the text
     sequence = tokenizer.texts_to_sequences([text])
-    padded = tf.keras.preprocessing.sequence.pad_sequences(sequence, maxlen=max_len)
+    padded_sequence = pad_sequences(sequence, maxlen=max_length)
     
     # Predict
-    prediction = model.predict(padded, verbose=0)
-    labels = ['negative', 'neutral', 'positive']
-    predicted_label = labels[tf.argmax(prediction, axis=1).numpy()[0]]
-    
-    return predicted_label
+    prediction = model.predict(padded_sequence)
+    sentiment = 'positive' if prediction[0][0] > 0.5 else 'negative' if prediction[0][0] < 0.5 else 'neutral'
+    return sentiment
