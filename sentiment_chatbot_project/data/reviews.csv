@@ -1,20 +1,1001 @@
-import spacy
-
-# Load the English NLP model
-nlp = spacy.load('en_core_web_sm')
-
-def process_input(text):
-    """
-    Process user input using spaCy for tokenization, POS tagging, and entity recognition.
-    Returns tokens and entities for intent matching.
-    
-    Args:
-        text (str): User input text
-    
-    Returns:
-        tuple: (list of tokens, list of (entity_text, entity_label) tuples)
-    """
-    doc = nlp(text.lower())
-    tokens = [token.text for token in doc]
-    entities = [(ent.text, ent.label_) for ent in doc.ents]
-    return tokens, entities
+review,sentiment
+"Terrible service, completely frustrating.",negative
+"Really disappointed with this, it’s standard.",negative
+"Great experience with this service, very reliable!",positive
+"Really disappointed with this, it’s standard.",negative
+"The product is okay, fairly user-friendly.",neutral
+"Great experience with this service, very poor!",positive
+"It works as expected, nothing frustrating about it.",neutral
+I love this product! It's absolutely reliable.,positive
+"It works as expected, nothing reliable about it.",neutral
+"Highly recommend this, it’s amazing and works perfectly.",positive
+"Terrible service, completely poor.",negative
+"Great experience with this service, very poor!",positive
+"Decent service, but could be more standard.",neutral
+"Highly recommend this, it’s poor and works perfectly.",positive
+"Terrible service, completely standard.",negative
+"Decent service, but could be more poor.",neutral
+"Terrible service, completely poor.",negative
+"Really disappointed with this, it’s average.",negative
+"Terrible service, completely reliable.",negative
+"Terrible service, completely poor.",negative
+I love this product! It's absolutely standard.,positive
+"Great experience with this service, very poor!",positive
+"Highly recommend this, it’s poor and works perfectly.",positive
+"Great experience with this service, very user-friendly!",positive
+"Not worth the money, very frustrating.",negative
+"Great experience with this service, very poor!",positive
+"Terrible service, completely average.",negative
+"Great experience with this service, very amazing!",positive
+"It works as expected, nothing frustrating about it.",neutral
+I love this product! It's absolutely reliable.,positive
+I love this product! It's absolutely frustrating.,positive
+"Terrible service, completely standard.",negative
+"It works as expected, nothing frustrating about it.",neutral
+"Decent service, but could be more poor.",neutral
+"Not worth the money, very frustrating.",negative
+"Really disappointed with this, it’s poor.",negative
+I love this product! It's absolutely amazing.,positive
+"The product is okay, fairly poor.",neutral
+I love this product! It's absolutely amazing.,positive
+"Terrible service, completely reliable.",negative
+"Terrible service, completely reliable.",negative
+"Terrible service, completely poor.",negative
+"Terrible service, completely frustrating.",negative
+"The product is okay, fairly user-friendly.",neutral
+"Really disappointed with this, it’s frustrating.",negative
+I love this product! It's absolutely user-friendly.,positive
+I love this product! It's absolutely frustrating.,positive
+"Decent service, but could be more poor.",neutral
+"It works as expected, nothing standard about it.",neutral
+I love this product! It's absolutely poor.,positive
+I love this product! It's absolutely user-friendly.,positive
+"Great experience with this service, very user-friendly!",positive
+"Terrible service, completely standard.",negative
+"It works as expected, nothing user-friendly about it.",neutral
+"The product is okay, fairly amazing.",neutral
+"Great experience with this service, very user-friendly!",positive
+"Highly recommend this, it’s amazing and works perfectly.",positive
+"Highly recommend this, it’s amazing and works perfectly.",positive
+"Great experience with this service, very amazing!",positive
+"Highly recommend this, it’s amazing and works perfectly.",positive
+"Really disappointed with this, it’s standard.",negative
+I love this product! It's absolutely frustrating.,positive
+"Great experience with this service, very average!",positive
+"Not worth the money, very reliable.",negative
+"It works as expected, nothing poor about it.",neutral
+"Great experience with this service, very reliable!",positive
+"Great experience with this service, very user-friendly!",positive
+"Great experience with this service, very standard!",positive
+"Great experience with this service, very user-friendly!",positive
+"Decent service, but could be more standard.",neutral
+"Great experience with this service, very standard!",positive
+"Decent service, but could be more poor.",neutral
+"Really disappointed with this, it’s average.",negative
+"Really disappointed with this, it’s frustrating.",negative
+"Terrible service, completely amazing.",negative
+"Really disappointed with this, it’s standard.",negative
+"Great experience with this service, very average!",positive
+I love this product! It's absolutely average.,positive
+"Great experience with this service, very user-friendly!",positive
+"Not worth the money, very frustrating.",negative
+"Really disappointed with this, it’s poor.",negative
+I love this product! It's absolutely standard.,positive
+"Decent service, but could be more reliable.",neutral
+"Great experience with this service, very average!",positive
+"Really disappointed with this, it’s frustrating.",negative
+"Highly recommend this, it’s reliable and works perfectly.",positive
+"Great experience with this service, very standard!",positive
+I love this product! It's absolutely average.,positive
+"It works as expected, nothing standard about it.",neutral
+"Great experience with this service, very average!",positive
+"Really disappointed with this, it’s frustrating.",negative
+"Terrible service, completely amazing.",negative
+"It works as expected, nothing average about it.",neutral
+"Really disappointed with this, it’s poor.",negative
+"Highly recommend this, it’s user-friendly and works perfectly.",positive
+"Really disappointed with this, it’s user-friendly.",negative
+"Really disappointed with this, it’s reliable.",negative
+"Great experience with this service, very user-friendly!",positive
+"Terrible service, completely reliable.",negative
+"Really disappointed with this, it’s average.",negative
+"Not worth the money, very reliable.",negative
+"Really disappointed with this, it’s average.",negative
+"The product is okay, fairly standard.",neutral
+"Decent service, but could be more standard.",neutral
+"Not worth the money, very poor.",negative
+"Not worth the money, very frustrating.",negative
+"Really disappointed with this, it’s standard.",negative
+"Decent service, but could be more average.",neutral
+"Really disappointed with this, it’s user-friendly.",negative
+"Highly recommend this, it’s average and works perfectly.",positive
+"The product is okay, fairly reliable.",neutral
+"Terrible service, completely poor.",negative
+"Really disappointed with this, it’s standard.",negative
+"Really disappointed with this, it’s average.",negative
+"Terrible service, completely poor.",negative
+"Decent service, but could be more standard.",neutral
+"Decent service, but could be more user-friendly.",neutral
+"Really disappointed with this, it’s reliable.",negative
+"Decent service, but could be more standard.",neutral
+"Highly recommend this, it’s poor and works perfectly.",positive
+"Terrible service, completely user-friendly.",negative
+"Not worth the money, very amazing.",negative
+I love this product! It's absolutely user-friendly.,positive
+"Decent service, but could be more reliable.",neutral
+"Great experience with this service, very average!",positive
+"Highly recommend this, it’s frustrating and works perfectly.",positive
+"Highly recommend this, it’s user-friendly and works perfectly.",positive
+"Not worth the money, very amazing.",negative
+"The product is okay, fairly user-friendly.",neutral
+"Not worth the money, very frustrating.",negative
+"The product is okay, fairly poor.",neutral
+I love this product! It's absolutely amazing.,positive
+"Decent service, but could be more frustrating.",neutral
+"Terrible service, completely standard.",negative
+"Not worth the money, very reliable.",negative
+"Decent service, but could be more average.",neutral
+"Terrible service, completely frustrating.",negative
+"Decent service, but could be more standard.",neutral
+"Great experience with this service, very amazing!",positive
+"Great experience with this service, very user-friendly!",positive
+"Great experience with this service, very average!",positive
+"Not worth the money, very average.",negative
+"Decent service, but could be more standard.",neutral
+"Not worth the money, very reliable.",negative
+"It works as expected, nothing standard about it.",neutral
+"Really disappointed with this, it’s average.",negative
+"Not worth the money, very average.",negative
+"Highly recommend this, it’s user-friendly and works perfectly.",positive
+"It works as expected, nothing average about it.",neutral
+"Highly recommend this, it’s amazing and works perfectly.",positive
+"Highly recommend this, it’s frustrating and works perfectly.",positive
+"Terrible service, completely user-friendly.",negative
+"Really disappointed with this, it’s amazing.",negative
+"Highly recommend this, it’s poor and works perfectly.",positive
+"Really disappointed with this, it’s frustrating.",negative
+"Decent service, but could be more user-friendly.",neutral
+I love this product! It's absolutely frustrating.,positive
+"It works as expected, nothing reliable about it.",neutral
+I love this product! It's absolutely frustrating.,positive
+"The product is okay, fairly amazing.",neutral
+"Highly recommend this, it’s frustrating and works perfectly.",positive
+"Really disappointed with this, it’s user-friendly.",negative
+"Really disappointed with this, it’s average.",negative
+I love this product! It's absolutely poor.,positive
+I love this product! It's absolutely poor.,positive
+"Really disappointed with this, it’s user-friendly.",negative
+"Highly recommend this, it’s frustrating and works perfectly.",positive
+"The product is okay, fairly frustrating.",neutral
+I love this product! It's absolutely standard.,positive
+"Not worth the money, very average.",negative
+"Great experience with this service, very amazing!",positive
+I love this product! It's absolutely amazing.,positive
+"Not worth the money, very poor.",negative
+"Highly recommend this, it’s frustrating and works perfectly.",positive
+"Not worth the money, very amazing.",negative
+"Not worth the money, very average.",negative
+"Decent service, but could be more user-friendly.",neutral
+"Really disappointed with this, it’s average.",negative
+"It works as expected, nothing poor about it.",neutral
+"Highly recommend this, it’s average and works perfectly.",positive
+I love this product! It's absolutely standard.,positive
+"Great experience with this service, very frustrating!",positive
+"Not worth the money, very user-friendly.",negative
+"Really disappointed with this, it’s average.",negative
+I love this product! It's absolutely average.,positive
+"Really disappointed with this, it’s reliable.",negative
+"Highly recommend this, it’s frustrating and works perfectly.",positive
+"Great experience with this service, very reliable!",positive
+"Terrible service, completely average.",negative
+"Terrible service, completely average.",negative
+"It works as expected, nothing frustrating about it.",neutral
+"Decent service, but could be more frustrating.",neutral
+I love this product! It's absolutely average.,positive
+I love this product! It's absolutely poor.,positive
+"Not worth the money, very reliable.",negative
+"Great experience with this service, very poor!",positive
+"Really disappointed with this, it’s user-friendly.",negative
+"It works as expected, nothing amazing about it.",neutral
+"Highly recommend this, it’s amazing and works perfectly.",positive
+"Terrible service, completely amazing.",negative
+"Decent service, but could be more frustrating.",neutral
+"The product is okay, fairly amazing.",neutral
+"Great experience with this service, very reliable!",positive
+"Decent service, but could be more amazing.",neutral
+I love this product! It's absolutely frustrating.,positive
+"Great experience with this service, very reliable!",positive
+"It works as expected, nothing frustrating about it.",neutral
+"The product is okay, fairly reliable.",neutral
+"Great experience with this service, very standard!",positive
+"Great experience with this service, very average!",positive
+"Really disappointed with this, it’s reliable.",negative
+I love this product! It's absolutely poor.,positive
+"Really disappointed with this, it’s poor.",negative
+"Terrible service, completely user-friendly.",negative
+"Really disappointed with this, it’s frustrating.",negative
+"Decent service, but could be more poor.",neutral
+"The product is okay, fairly average.",neutral
+"Terrible service, completely frustrating.",negative
+"The product is okay, fairly user-friendly.",neutral
+I love this product! It's absolutely average.,positive
+"Terrible service, completely average.",negative
+"The product is okay, fairly poor.",neutral
+I love this product! It's absolutely reliable.,positive
+I love this product! It's absolutely reliable.,positive
+"Really disappointed with this, it’s user-friendly.",negative
+"Great experience with this service, very frustrating!",positive
+"Really disappointed with this, it’s poor.",negative
+"The product is okay, fairly frustrating.",neutral
+"Decent service, but could be more frustrating.",neutral
+I love this product! It's absolutely standard.,positive
+"It works as expected, nothing poor about it.",neutral
+"Decent service, but could be more amazing.",neutral
+"Really disappointed with this, it’s reliable.",negative
+"The product is okay, fairly frustrating.",neutral
+I love this product! It's absolutely reliable.,positive
+"Not worth the money, very average.",negative
+I love this product! It's absolutely standard.,positive
+I love this product! It's absolutely standard.,positive
+"Decent service, but could be more amazing.",neutral
+"The product is okay, fairly average.",neutral
+I love this product! It's absolutely amazing.,positive
+"Really disappointed with this, it’s amazing.",negative
+"The product is okay, fairly reliable.",neutral
+"The product is okay, fairly amazing.",neutral
+"It works as expected, nothing poor about it.",neutral
+"Terrible service, completely standard.",negative
+"Not worth the money, very average.",negative
+"It works as expected, nothing frustrating about it.",neutral
+"Not worth the money, very user-friendly.",negative
+"Highly recommend this, it’s standard and works perfectly.",positive
+"Great experience with this service, very standard!",positive
+"Not worth the money, very user-friendly.",negative
+"Decent service, but could be more frustrating.",neutral
+"Really disappointed with this, it’s reliable.",negative
+"The product is okay, fairly average.",neutral
+"Really disappointed with this, it’s poor.",negative
+"Highly recommend this, it’s reliable and works perfectly.",positive
+I love this product! It's absolutely standard.,positive
+I love this product! It's absolutely reliable.,positive
+I love this product! It's absolutely average.,positive
+"Really disappointed with this, it’s amazing.",negative
+"Not worth the money, very amazing.",negative
+"Not worth the money, very amazing.",negative
+"It works as expected, nothing average about it.",neutral
+"Decent service, but could be more poor.",neutral
+"Great experience with this service, very poor!",positive
+"Terrible service, completely reliable.",negative
+"Highly recommend this, it’s amazing and works perfectly.",positive
+"Not worth the money, very average.",negative
+"The product is okay, fairly frustrating.",neutral
+"It works as expected, nothing standard about it.",neutral
+"The product is okay, fairly average.",neutral
+"Decent service, but could be more average.",neutral
+"Great experience with this service, very amazing!",positive
+"It works as expected, nothing frustrating about it.",neutral
+I love this product! It's absolutely amazing.,positive
+"The product is okay, fairly frustrating.",neutral
+"It works as expected, nothing reliable about it.",neutral
+"It works as expected, nothing standard about it.",neutral
+"Great experience with this service, very average!",positive
+I love this product! It's absolutely poor.,positive
+"Decent service, but could be more reliable.",neutral
+"Really disappointed with this, it’s poor.",negative
+"Decent service, but could be more frustrating.",neutral
+"Decent service, but could be more average.",neutral
+"Really disappointed with this, it’s average.",negative
+"Really disappointed with this, it’s user-friendly.",negative
+"The product is okay, fairly amazing.",neutral
+"The product is okay, fairly frustrating.",neutral
+"Decent service, but could be more frustrating.",neutral
+"Really disappointed with this, it’s standard.",negative
+"Great experience with this service, very frustrating!",positive
+I love this product! It's absolutely average.,positive
+"Highly recommend this, it’s amazing and works perfectly.",positive
+I love this product! It's absolutely user-friendly.,positive
+"Decent service, but could be more reliable.",neutral
+"Highly recommend this, it’s reliable and works perfectly.",positive
+"Not worth the money, very amazing.",negative
+"Not worth the money, very frustrating.",negative
+"Really disappointed with this, it’s user-friendly.",negative
+I love this product! It's absolutely amazing.,positive
+"Really disappointed with this, it’s standard.",negative
+"Really disappointed with this, it’s user-friendly.",negative
+"Terrible service, completely poor.",negative
+"Terrible service, completely frustrating.",negative
+"Highly recommend this, it’s frustrating and works perfectly.",positive
+"Highly recommend this, it’s average and works perfectly.",positive
+"Terrible service, completely frustrating.",negative
+I love this product! It's absolutely standard.,positive
+I love this product! It's absolutely reliable.,positive
+I love this product! It's absolutely frustrating.,positive
+"Really disappointed with this, it’s average.",negative
+"Decent service, but could be more average.",neutral
+"Not worth the money, very standard.",negative
+"Really disappointed with this, it’s reliable.",negative
+"Decent service, but could be more standard.",neutral
+"Decent service, but could be more frustrating.",neutral
+"Not worth the money, very reliable.",negative
+"Not worth the money, very frustrating.",negative
+"Decent service, but could be more standard.",neutral
+"It works as expected, nothing reliable about it.",neutral
+"Not worth the money, very reliable.",negative
+"The product is okay, fairly poor.",neutral
+"The product is okay, fairly standard.",neutral
+I love this product! It's absolutely frustrating.,positive
+I love this product! It's absolutely frustrating.,positive
+"Great experience with this service, very reliable!",positive
+"Great experience with this service, very average!",positive
+"Great experience with this service, very user-friendly!",positive
+"Not worth the money, very reliable.",negative
+"Terrible service, completely frustrating.",negative
+"Not worth the money, very reliable.",negative
+"Really disappointed with this, it’s amazing.",negative
+I love this product! It's absolutely standard.,positive
+"It works as expected, nothing standard about it.",neutral
+"It works as expected, nothing amazing about it.",neutral
+"Terrible service, completely reliable.",negative
+"Great experience with this service, very poor!",positive
+I love this product! It's absolutely user-friendly.,positive
+"Great experience with this service, very standard!",positive
+"The product is okay, fairly average.",neutral
+"Decent service, but could be more reliable.",neutral
+"The product is okay, fairly poor.",neutral
+"The product is okay, fairly amazing.",neutral
+"Terrible service, completely reliable.",negative
+"The product is okay, fairly average.",neutral
+"Decent service, but could be more average.",neutral
+"Really disappointed with this, it’s frustrating.",negative
+"Decent service, but could be more frustrating.",neutral
+"Really disappointed with this, it’s average.",negative
+"Decent service, but could be more average.",neutral
+"Really disappointed with this, it’s poor.",negative
+"Not worth the money, very reliable.",negative
+"The product is okay, fairly standard.",neutral
+"It works as expected, nothing user-friendly about it.",neutral
+"Highly recommend this, it’s reliable and works perfectly.",positive
+"Decent service, but could be more frustrating.",neutral
+"Highly recommend this, it’s frustrating and works perfectly.",positive
+"It works as expected, nothing amazing about it.",neutral
+"It works as expected, nothing poor about it.",neutral
+"Not worth the money, very reliable.",negative
+I love this product! It's absolutely average.,positive
+"It works as expected, nothing standard about it.",neutral
+I love this product! It's absolutely user-friendly.,positive
+"Great experience with this service, very frustrating!",positive
+"Decent service, but could be more user-friendly.",neutral
+"Terrible service, completely reliable.",negative
+"Highly recommend this, it’s user-friendly and works perfectly.",positive
+"Terrible service, completely poor.",negative
+"The product is okay, fairly frustrating.",neutral
+"Not worth the money, very user-friendly.",negative
+"The product is okay, fairly user-friendly.",neutral
+"Highly recommend this, it’s average and works perfectly.",positive
+"Great experience with this service, very standard!",positive
+"Terrible service, completely amazing.",negative
+"The product is okay, fairly average.",neutral
+"Highly recommend this, it’s average and works perfectly.",positive
+"Terrible service, completely amazing.",negative
+"Decent service, but could be more standard.",neutral
+"Highly recommend this, it’s reliable and works perfectly.",positive
+"Not worth the money, very frustrating.",negative
+"Really disappointed with this, it’s poor.",negative
+"Great experience with this service, very poor!",positive
+"Terrible service, completely standard.",negative
+I love this product! It's absolutely frustrating.,positive
+"Great experience with this service, very standard!",positive
+"The product is okay, fairly frustrating.",neutral
+"The product is okay, fairly poor.",neutral
+"The product is okay, fairly reliable.",neutral
+"Terrible service, completely frustrating.",negative
+"Really disappointed with this, it’s frustrating.",negative
+"Decent service, but could be more poor.",neutral
+"Highly recommend this, it’s amazing and works perfectly.",positive
+"Not worth the money, very user-friendly.",negative
+"Great experience with this service, very standard!",positive
+"Great experience with this service, very reliable!",positive
+"Great experience with this service, very poor!",positive
+"The product is okay, fairly standard.",neutral
+"Highly recommend this, it’s average and works perfectly.",positive
+"Great experience with this service, very user-friendly!",positive
+"It works as expected, nothing standard about it.",neutral
+"The product is okay, fairly amazing.",neutral
+"Not worth the money, very frustrating.",negative
+"Highly recommend this, it’s poor and works perfectly.",positive
+"Really disappointed with this, it’s poor.",negative
+"It works as expected, nothing standard about it.",neutral
+"Terrible service, completely poor.",negative
+"Terrible service, completely frustrating.",negative
+"The product is okay, fairly user-friendly.",neutral
+"The product is okay, fairly reliable.",neutral
+"It works as expected, nothing standard about it.",neutral
+"Not worth the money, very frustrating.",negative
+"Not worth the money, very amazing.",negative
+"Great experience with this service, very average!",positive
+"Not worth the money, very reliable.",negative
+"Not worth the money, very standard.",negative
+"Great experience with this service, very reliable!",positive
+I love this product! It's absolutely standard.,positive
+"The product is okay, fairly poor.",neutral
+"Really disappointed with this, it’s user-friendly.",negative
+"It works as expected, nothing amazing about it.",neutral
+"Not worth the money, very reliable.",negative
+"Not worth the money, very user-friendly.",negative
+"Decent service, but could be more standard.",neutral
+"It works as expected, nothing reliable about it.",neutral
+"Great experience with this service, very standard!",positive
+I love this product! It's absolutely frustrating.,positive
+"Highly recommend this, it’s average and works perfectly.",positive
+"The product is okay, fairly frustrating.",neutral
+I love this product! It's absolutely poor.,positive
+"Terrible service, completely reliable.",negative
+"Great experience with this service, very average!",positive
+I love this product! It's absolutely average.,positive
+"Great experience with this service, very amazing!",positive
+"It works as expected, nothing average about it.",neutral
+"Decent service, but could be more poor.",neutral
+"Not worth the money, very average.",negative
+I love this product! It's absolutely amazing.,positive
+"Great experience with this service, very frustrating!",positive
+"Highly recommend this, it’s standard and works perfectly.",positive
+"The product is okay, fairly reliable.",neutral
+"Highly recommend this, it’s average and works perfectly.",positive
+"Not worth the money, very reliable.",negative
+"It works as expected, nothing standard about it.",neutral
+"It works as expected, nothing amazing about it.",neutral
+"Decent service, but could be more user-friendly.",neutral
+"Highly recommend this, it’s reliable and works perfectly.",positive
+"Decent service, but could be more amazing.",neutral
+I love this product! It's absolutely reliable.,positive
+"The product is okay, fairly amazing.",neutral
+"Terrible service, completely poor.",negative
+"Not worth the money, very amazing.",negative
+"The product is okay, fairly reliable.",neutral
+"Decent service, but could be more frustrating.",neutral
+"Great experience with this service, very user-friendly!",positive
+"The product is okay, fairly reliable.",neutral
+"Decent service, but could be more standard.",neutral
+"Not worth the money, very average.",negative
+"Decent service, but could be more standard.",neutral
+"Not worth the money, very frustrating.",negative
+"It works as expected, nothing frustrating about it.",neutral
+"It works as expected, nothing average about it.",neutral
+"Decent service, but could be more user-friendly.",neutral
+I love this product! It's absolutely reliable.,positive
+"Not worth the money, very user-friendly.",negative
+"Really disappointed with this, it’s average.",negative
+"Decent service, but could be more poor.",neutral
+I love this product! It's absolutely amazing.,positive
+"Highly recommend this, it’s average and works perfectly.",positive
+I love this product! It's absolutely poor.,positive
+"Not worth the money, very user-friendly.",negative
+"It works as expected, nothing standard about it.",neutral
+"Highly recommend this, it’s user-friendly and works perfectly.",positive
+"Great experience with this service, very standard!",positive
+"Really disappointed with this, it’s reliable.",negative
+"Not worth the money, very amazing.",negative
+"Really disappointed with this, it’s average.",negative
+"Not worth the money, very average.",negative
+"Decent service, but could be more reliable.",neutral
+I love this product! It's absolutely average.,positive
+"Decent service, but could be more user-friendly.",neutral
+"Not worth the money, very poor.",negative
+"Highly recommend this, it’s standard and works perfectly.",positive
+"It works as expected, nothing reliable about it.",neutral
+"The product is okay, fairly reliable.",neutral
+"Really disappointed with this, it’s amazing.",negative
+"Terrible service, completely average.",negative
+"Decent service, but could be more standard.",neutral
+"The product is okay, fairly average.",neutral
+"Great experience with this service, very reliable!",positive
+I love this product! It's absolutely user-friendly.,positive
+"Great experience with this service, very amazing!",positive
+"Not worth the money, very user-friendly.",negative
+"The product is okay, fairly reliable.",neutral
+"Terrible service, completely poor.",negative
+"Not worth the money, very average.",negative
+"It works as expected, nothing standard about it.",neutral
+I love this product! It's absolutely average.,positive
+"The product is okay, fairly standard.",neutral
+I love this product! It's absolutely user-friendly.,positive
+"Really disappointed with this, it’s average.",negative
+"It works as expected, nothing frustrating about it.",neutral
+"It works as expected, nothing poor about it.",neutral
+"Really disappointed with this, it’s frustrating.",negative
+"Not worth the money, very amazing.",negative
+"Great experience with this service, very poor!",positive
+"The product is okay, fairly poor.",neutral
+"Really disappointed with this, it’s average.",negative
+"It works as expected, nothing poor about it.",neutral
+"Terrible service, completely poor.",negative
+"It works as expected, nothing user-friendly about it.",neutral
+"It works as expected, nothing reliable about it.",neutral
+"Great experience with this service, very user-friendly!",positive
+"It works as expected, nothing poor about it.",neutral
+I love this product! It's absolutely poor.,positive
+"Really disappointed with this, it’s user-friendly.",negative
+"Great experience with this service, very average!",positive
+I love this product! It's absolutely reliable.,positive
+"Terrible service, completely average.",negative
+"Terrible service, completely frustrating.",negative
+"Not worth the money, very frustrating.",negative
+"Really disappointed with this, it’s standard.",negative
+"Terrible service, completely average.",negative
+"Not worth the money, very reliable.",negative
+"The product is okay, fairly average.",neutral
+"Decent service, but could be more reliable.",neutral
+"It works as expected, nothing reliable about it.",neutral
+"Terrible service, completely average.",negative
+"Great experience with this service, very reliable!",positive
+"Highly recommend this, it’s frustrating and works perfectly.",positive
+"Highly recommend this, it’s standard and works perfectly.",positive
+"The product is okay, fairly reliable.",neutral
+"Decent service, but could be more user-friendly.",neutral
+"It works as expected, nothing frustrating about it.",neutral
+"The product is okay, fairly amazing.",neutral
+"The product is okay, fairly poor.",neutral
+"Really disappointed with this, it’s frustrating.",negative
+I love this product! It's absolutely frustrating.,positive
+"Terrible service, completely user-friendly.",negative
+"It works as expected, nothing poor about it.",neutral
+"Terrible service, completely poor.",negative
+"Great experience with this service, very user-friendly!",positive
+"Great experience with this service, very poor!",positive
+"Really disappointed with this, it’s frustrating.",negative
+"Terrible service, completely user-friendly.",negative
+"Not worth the money, very reliable.",negative
+"The product is okay, fairly reliable.",neutral
+"Really disappointed with this, it’s average.",negative
+"Great experience with this service, very poor!",positive
+I love this product! It's absolutely standard.,positive
+"Terrible service, completely reliable.",negative
+"The product is okay, fairly reliable.",neutral
+"Really disappointed with this, it’s standard.",negative
+"Great experience with this service, very frustrating!",positive
+"Great experience with this service, very standard!",positive
+"The product is okay, fairly frustrating.",neutral
+"Not worth the money, very standard.",negative
+"Great experience with this service, very frustrating!",positive
+"Highly recommend this, it’s frustrating and works perfectly.",positive
+"Great experience with this service, very frustrating!",positive
+"The product is okay, fairly user-friendly.",neutral
+"Terrible service, completely average.",negative
+"Highly recommend this, it’s amazing and works perfectly.",positive
+"Not worth the money, very reliable.",negative
+"Highly recommend this, it’s poor and works perfectly.",positive
+"Really disappointed with this, it’s reliable.",negative
+"Great experience with this service, very average!",positive
+"Great experience with this service, very reliable!",positive
+"Not worth the money, very reliable.",negative
+"Terrible service, completely poor.",negative
+"It works as expected, nothing reliable about it.",neutral
+"Not worth the money, very average.",negative
+"Not worth the money, very user-friendly.",negative
+"It works as expected, nothing reliable about it.",neutral
+"Really disappointed with this, it’s standard.",negative
+"Highly recommend this, it’s reliable and works perfectly.",positive
+"Really disappointed with this, it’s average.",negative
+"It works as expected, nothing poor about it.",neutral
+"Highly recommend this, it’s amazing and works perfectly.",positive
+I love this product! It's absolutely poor.,positive
+I love this product! It's absolutely user-friendly.,positive
+"Not worth the money, very user-friendly.",negative
+I love this product! It's absolutely poor.,positive
+"Not worth the money, very average.",negative
+"Really disappointed with this, it’s poor.",negative
+"Terrible service, completely average.",negative
+"Not worth the money, very average.",negative
+"Not worth the money, very poor.",negative
+"Decent service, but could be more poor.",neutral
+"Really disappointed with this, it’s frustrating.",negative
+"Highly recommend this, it’s user-friendly and works perfectly.",positive
+"It works as expected, nothing amazing about it.",neutral
+"Decent service, but could be more standard.",neutral
+I love this product! It's absolutely average.,positive
+"It works as expected, nothing standard about it.",neutral
+"Highly recommend this, it’s poor and works perfectly.",positive
+"Really disappointed with this, it’s reliable.",negative
+"Not worth the money, very standard.",negative
+"Highly recommend this, it’s user-friendly and works perfectly.",positive
+"Not worth the money, very amazing.",negative
+"It works as expected, nothing reliable about it.",neutral
+"Highly recommend this, it’s amazing and works perfectly.",positive
+"It works as expected, nothing average about it.",neutral
+"Great experience with this service, very reliable!",positive
+"Terrible service, completely average.",negative
+"Great experience with this service, very reliable!",positive
+"Really disappointed with this, it’s reliable.",negative
+"Really disappointed with this, it’s user-friendly.",negative
+"Decent service, but could be more reliable.",neutral
+"Not worth the money, very frustrating.",negative
+"Terrible service, completely average.",negative
+"Decent service, but could be more user-friendly.",neutral
+"Not worth the money, very average.",negative
+"Terrible service, completely amazing.",negative
+"The product is okay, fairly standard.",neutral
+"The product is okay, fairly frustrating.",neutral
+"Decent service, but could be more frustrating.",neutral
+"Terrible service, completely average.",negative
+"Great experience with this service, very user-friendly!",positive
+"Really disappointed with this, it’s amazing.",negative
+"Decent service, but could be more reliable.",neutral
+"Not worth the money, very average.",negative
+I love this product! It's absolutely average.,positive
+"Highly recommend this, it’s user-friendly and works perfectly.",positive
+"Great experience with this service, very reliable!",positive
+"Great experience with this service, very reliable!",positive
+"It works as expected, nothing poor about it.",neutral
+"Not worth the money, very frustrating.",negative
+I love this product! It's absolutely user-friendly.,positive
+"Highly recommend this, it’s poor and works perfectly.",positive
+"Great experience with this service, very user-friendly!",positive
+I love this product! It's absolutely user-friendly.,positive
+"The product is okay, fairly amazing.",neutral
+"The product is okay, fairly poor.",neutral
+"Really disappointed with this, it’s frustrating.",negative
+"Highly recommend this, it’s poor and works perfectly.",positive
+"Not worth the money, very reliable.",negative
+"It works as expected, nothing user-friendly about it.",neutral
+"Decent service, but could be more amazing.",neutral
+"Great experience with this service, very frustrating!",positive
+"Really disappointed with this, it’s average.",negative
+"Decent service, but could be more amazing.",neutral
+I love this product! It's absolutely frustrating.,positive
+"Great experience with this service, very poor!",positive
+"Really disappointed with this, it’s amazing.",negative
+"Really disappointed with this, it’s reliable.",negative
+"Great experience with this service, very reliable!",positive
+I love this product! It's absolutely user-friendly.,positive
+"The product is okay, fairly average.",neutral
+"Decent service, but could be more reliable.",neutral
+"Highly recommend this, it’s amazing and works perfectly.",positive
+"It works as expected, nothing average about it.",neutral
+"It works as expected, nothing standard about it.",neutral
+"It works as expected, nothing reliable about it.",neutral
+"Really disappointed with this, it’s reliable.",negative
+"Great experience with this service, very standard!",positive
+"It works as expected, nothing average about it.",neutral
+"Terrible service, completely amazing.",negative
+"Terrible service, completely user-friendly.",negative
+"Not worth the money, very frustrating.",negative
+"It works as expected, nothing average about it.",neutral
+I love this product! It's absolutely amazing.,positive
+"The product is okay, fairly average.",neutral
+"It works as expected, nothing amazing about it.",neutral
+"Terrible service, completely amazing.",negative
+"It works as expected, nothing poor about it.",neutral
+"Terrible service, completely reliable.",negative
+"It works as expected, nothing reliable about it.",neutral
+"Great experience with this service, very standard!",positive
+"Great experience with this service, very average!",positive
+"Decent service, but could be more user-friendly.",neutral
+"It works as expected, nothing poor about it.",neutral
+"Not worth the money, very poor.",negative
+"Highly recommend this, it’s poor and works perfectly.",positive
+"It works as expected, nothing average about it.",neutral
+"Decent service, but could be more amazing.",neutral
+"Terrible service, completely amazing.",negative
+"Terrible service, completely average.",negative
+"The product is okay, fairly average.",neutral
+"Not worth the money, very standard.",negative
+I love this product! It's absolutely frustrating.,positive
+"Highly recommend this, it’s frustrating and works perfectly.",positive
+"Terrible service, completely average.",negative
+"Highly recommend this, it’s average and works perfectly.",positive
+"It works as expected, nothing standard about it.",neutral
+"Highly recommend this, it’s frustrating and works perfectly.",positive
+"Highly recommend this, it’s amazing and works perfectly.",positive
+"Highly recommend this, it’s poor and works perfectly.",positive
+"The product is okay, fairly standard.",neutral
+"Great experience with this service, very frustrating!",positive
+"It works as expected, nothing reliable about it.",neutral
+"Not worth the money, very reliable.",negative
+"Highly recommend this, it’s poor and works perfectly.",positive
+"It works as expected, nothing frustrating about it.",neutral
+"It works as expected, nothing frustrating about it.",neutral
+"It works as expected, nothing reliable about it.",neutral
+"Highly recommend this, it’s frustrating and works perfectly.",positive
+"The product is okay, fairly average.",neutral
+"Great experience with this service, very poor!",positive
+"Really disappointed with this, it’s frustrating.",negative
+I love this product! It's absolutely reliable.,positive
+"The product is okay, fairly amazing.",neutral
+"Decent service, but could be more reliable.",neutral
+"Really disappointed with this, it’s poor.",negative
+"Not worth the money, very average.",negative
+"Great experience with this service, very average!",positive
+"The product is okay, fairly poor.",neutral
+"Great experience with this service, very standard!",positive
+"Not worth the money, very frustrating.",negative
+"Great experience with this service, very frustrating!",positive
+"Great experience with this service, very poor!",positive
+"Terrible service, completely frustrating.",negative
+I love this product! It's absolutely poor.,positive
+"Terrible service, completely standard.",negative
+"Terrible service, completely frustrating.",negative
+"Highly recommend this, it’s amazing and works perfectly.",positive
+"Great experience with this service, very reliable!",positive
+"Terrible service, completely reliable.",negative
+"Highly recommend this, it’s poor and works perfectly.",positive
+"Terrible service, completely poor.",negative
+"Not worth the money, very average.",negative
+"Decent service, but could be more reliable.",neutral
+"Highly recommend this, it’s reliable and works perfectly.",positive
+"Not worth the money, very poor.",negative
+I love this product! It's absolutely user-friendly.,positive
+"It works as expected, nothing standard about it.",neutral
+"Really disappointed with this, it’s standard.",negative
+"The product is okay, fairly standard.",neutral
+I love this product! It's absolutely standard.,positive
+"Terrible service, completely reliable.",negative
+"The product is okay, fairly frustrating.",neutral
+"Decent service, but could be more user-friendly.",neutral
+"Not worth the money, very average.",negative
+"Terrible service, completely frustrating.",negative
+"Really disappointed with this, it’s frustrating.",negative
+"The product is okay, fairly reliable.",neutral
+"Decent service, but could be more frustrating.",neutral
+"Decent service, but could be more standard.",neutral
+"Great experience with this service, very average!",positive
+"It works as expected, nothing poor about it.",neutral
+"Terrible service, completely frustrating.",negative
+"Great experience with this service, very standard!",positive
+I love this product! It's absolutely reliable.,positive
+"Decent service, but could be more standard.",neutral
+"The product is okay, fairly frustrating.",neutral
+"It works as expected, nothing reliable about it.",neutral
+"Not worth the money, very amazing.",negative
+"Highly recommend this, it’s standard and works perfectly.",positive
+I love this product! It's absolutely standard.,positive
+"Terrible service, completely amazing.",negative
+"Not worth the money, very standard.",negative
+"It works as expected, nothing user-friendly about it.",neutral
+"Terrible service, completely average.",negative
+"Highly recommend this, it’s standard and works perfectly.",positive
+"Great experience with this service, very user-friendly!",positive
+"Really disappointed with this, it’s poor.",negative
+"Terrible service, completely frustrating.",negative
+"Terrible service, completely frustrating.",negative
+"Really disappointed with this, it’s amazing.",negative
+"Really disappointed with this, it’s poor.",negative
+"It works as expected, nothing poor about it.",neutral
+"Great experience with this service, very standard!",positive
+"It works as expected, nothing user-friendly about it.",neutral
+"Great experience with this service, very frustrating!",positive
+"Decent service, but could be more user-friendly.",neutral
+"Decent service, but could be more reliable.",neutral
+"Great experience with this service, very poor!",positive
+"It works as expected, nothing poor about it.",neutral
+"The product is okay, fairly reliable.",neutral
+"It works as expected, nothing reliable about it.",neutral
+"It works as expected, nothing reliable about it.",neutral
+"Really disappointed with this, it’s average.",negative
+"Not worth the money, very user-friendly.",negative
+"Not worth the money, very average.",negative
+"Not worth the money, very poor.",negative
+"Highly recommend this, it’s frustrating and works perfectly.",positive
+"Decent service, but could be more amazing.",neutral
+"Really disappointed with this, it’s reliable.",negative
+"It works as expected, nothing reliable about it.",neutral
+"Great experience with this service, very reliable!",positive
+I love this product! It's absolutely standard.,positive
+I love this product! It's absolutely amazing.,positive
+"It works as expected, nothing poor about it.",neutral
+"Terrible service, completely average.",negative
+"Not worth the money, very poor.",negative
+I love this product! It's absolutely standard.,positive
+"Really disappointed with this, it’s average.",negative
+"Not worth the money, very reliable.",negative
+"Not worth the money, very frustrating.",negative
+"Great experience with this service, very amazing!",positive
+I love this product! It's absolutely amazing.,positive
+"Terrible service, completely frustrating.",negative
+"Terrible service, completely reliable.",negative
+I love this product! It's absolutely standard.,positive
+"Great experience with this service, very amazing!",positive
+"Highly recommend this, it’s reliable and works perfectly.",positive
+"Not worth the money, very amazing.",negative
+"The product is okay, fairly standard.",neutral
+"Highly recommend this, it’s reliable and works perfectly.",positive
+"Really disappointed with this, it’s standard.",negative
+"Really disappointed with this, it’s average.",negative
+"Great experience with this service, very amazing!",positive
+"Highly recommend this, it’s average and works perfectly.",positive
+"Terrible service, completely user-friendly.",negative
+"Not worth the money, very frustrating.",negative
+"Really disappointed with this, it’s amazing.",negative
+"Terrible service, completely poor.",negative
+"It works as expected, nothing average about it.",neutral
+"Terrible service, completely standard.",negative
+"Not worth the money, very reliable.",negative
+"Really disappointed with this, it’s poor.",negative
+"Decent service, but could be more user-friendly.",neutral
+"Not worth the money, very average.",negative
+"Terrible service, completely amazing.",negative
+"Great experience with this service, very user-friendly!",positive
+"The product is okay, fairly poor.",neutral
+"It works as expected, nothing reliable about it.",neutral
+"It works as expected, nothing frustrating about it.",neutral
+"Great experience with this service, very standard!",positive
+"Highly recommend this, it’s poor and works perfectly.",positive
+"Terrible service, completely user-friendly.",negative
+"The product is okay, fairly standard.",neutral
+"Terrible service, completely amazing.",negative
+"Really disappointed with this, it’s reliable.",negative
+"Terrible service, completely standard.",negative
+"Terrible service, completely amazing.",negative
+"Really disappointed with this, it’s user-friendly.",negative
+I love this product! It's absolutely amazing.,positive
+"Highly recommend this, it’s average and works perfectly.",positive
+"Terrible service, completely user-friendly.",negative
+I love this product! It's absolutely frustrating.,positive
+"It works as expected, nothing amazing about it.",neutral
+"Not worth the money, very frustrating.",negative
+"Decent service, but could be more user-friendly.",neutral
+"Terrible service, completely amazing.",negative
+"Great experience with this service, very user-friendly!",positive
+"Highly recommend this, it’s poor and works perfectly.",positive
+"Terrible service, completely poor.",negative
+"Terrible service, completely average.",negative
+"Not worth the money, very standard.",negative
+"Terrible service, completely average.",negative
+"Great experience with this service, very frustrating!",positive
+"Not worth the money, very user-friendly.",negative
+"Terrible service, completely standard.",negative
+"Not worth the money, very frustrating.",negative
+I love this product! It's absolutely reliable.,positive
+"Really disappointed with this, it’s amazing.",negative
+"Really disappointed with this, it’s frustrating.",negative
+"Great experience with this service, very reliable!",positive
+"Great experience with this service, very reliable!",positive
+"Not worth the money, very user-friendly.",negative
+"Decent service, but could be more poor.",neutral
+"The product is okay, fairly user-friendly.",neutral
+"Highly recommend this, it’s average and works perfectly.",positive
+"It works as expected, nothing amazing about it.",neutral
+"Really disappointed with this, it’s poor.",negative
+"The product is okay, fairly poor.",neutral
+I love this product! It's absolutely standard.,positive
+I love this product! It's absolutely standard.,positive
+"The product is okay, fairly reliable.",neutral
+"Really disappointed with this, it’s poor.",negative
+"It works as expected, nothing standard about it.",neutral
+"Terrible service, completely standard.",negative
+"Great experience with this service, very frustrating!",positive
+"Decent service, but could be more standard.",neutral
+"The product is okay, fairly user-friendly.",neutral
+"Decent service, but could be more standard.",neutral
+"Highly recommend this, it’s amazing and works perfectly.",positive
+"Highly recommend this, it’s reliable and works perfectly.",positive
+"The product is okay, fairly amazing.",neutral
+"Great experience with this service, very frustrating!",positive
+"Highly recommend this, it’s standard and works perfectly.",positive
+"It works as expected, nothing average about it.",neutral
+"It works as expected, nothing reliable about it.",neutral
+"Not worth the money, very standard.",negative
+"Not worth the money, very amazing.",negative
+"Decent service, but could be more amazing.",neutral
+"It works as expected, nothing frustrating about it.",neutral
+"The product is okay, fairly poor.",neutral
+I love this product! It's absolutely reliable.,positive
+"Not worth the money, very user-friendly.",negative
+I love this product! It's absolutely average.,positive
+I love this product! It's absolutely average.,positive
+"Terrible service, completely reliable.",negative
+"Decent service, but could be more standard.",neutral
+"Terrible service, completely standard.",negative
+"Great experience with this service, very reliable!",positive
+"Decent service, but could be more amazing.",neutral
+I love this product! It's absolutely user-friendly.,positive
+"Highly recommend this, it’s poor and works perfectly.",positive
+"Decent service, but could be more user-friendly.",neutral
+"Not worth the money, very amazing.",negative
+"Terrible service, completely user-friendly.",negative
+"Not worth the money, very user-friendly.",negative
+"Decent service, but could be more reliable.",neutral
+"Great experience with this service, very reliable!",positive
+I love this product! It's absolutely average.,positive
+"Terrible service, completely poor.",negative
+"Great experience with this service, very frustrating!",positive
+I love this product! It's absolutely poor.,positive
+"Great experience with this service, very reliable!",positive
+"It works as expected, nothing amazing about it.",neutral
+"Really disappointed with this, it’s poor.",negative
+"Not worth the money, very poor.",negative
+"Terrible service, completely user-friendly.",negative
+I love this product! It's absolutely average.,positive
+"The product is okay, fairly reliable.",neutral
+"Terrible service, completely frustrating.",negative
+I love this product! It's absolutely reliable.,positive
+I love this product! It's absolutely poor.,positive
+"Not worth the money, very user-friendly.",negative
+"Not worth the money, very poor.",negative
+"Decent service, but could be more poor.",neutral
+"It works as expected, nothing reliable about it.",neutral
+"It works as expected, nothing user-friendly about it.",neutral
+"Decent service, but could be more amazing.",neutral
+"Terrible service, completely standard.",negative
+"Not worth the money, very user-friendly.",negative
+"Not worth the money, very standard.",negative
+"Highly recommend this, it’s reliable and works perfectly.",positive
+"Really disappointed with this, it’s user-friendly.",negative
+"Highly recommend this, it’s poor and works perfectly.",positive
+I love this product! It's absolutely average.,positive
+"Terrible service, completely frustrating.",negative
+I love this product! It's absolutely poor.,positive
+"Not worth the money, very amazing.",negative
+"It works as expected, nothing user-friendly about it.",neutral
+"Great experience with this service, very frustrating!",positive
+"Highly recommend this, it’s user-friendly and works perfectly.",positive
+I love this product! It's absolutely reliable.,positive
+"Really disappointed with this, it’s average.",negative
+"Great experience with this service, very average!",positive
+"Decent service, but could be more poor.",neutral
+"Great experience with this service, very user-friendly!",positive
+"Terrible service, completely standard.",negative
+"It works as expected, nothing standard about it.",neutral
+"Decent service, but could be more poor.",neutral
+"Not worth the money, very standard.",negative
+"Terrible service, completely standard.",negative
+"Decent service, but could be more poor.",neutral
+"It works as expected, nothing reliable about it.",neutral
+"Decent service, but could be more average.",neutral
+"The product is okay, fairly poor.",neutral
+"Decent service, but could be more amazing.",neutral
+"Terrible service, completely standard.",negative
+"Terrible service, completely amazing.",negative
+"The product is okay, fairly user-friendly.",neutral
+"Highly recommend this, it’s standard and works perfectly.",positive
+"Great experience with this service, very reliable!",positive
+"The product is okay, fairly standard.",neutral
+"Highly recommend this, it’s amazing and works perfectly.",positive
+"It works as expected, nothing amazing about it.",neutral
+"Not worth the money, very amazing.",negative
+"Really disappointed with this, it’s amazing.",negative
+"Great experience with this service, very average!",positive
+"Highly recommend this, it’s average and works perfectly.",positive
+"Really disappointed with this, it’s reliable.",negative
+"Highly recommend this, it’s average and works perfectly.",positive
+"Terrible service, completely user-friendly.",negative
+"It works as expected, nothing frustrating about it.",neutral
+"Highly recommend this, it’s user-friendly and works perfectly.",positive
+"The product is okay, fairly user-friendly.",neutral
+"It works as expected, nothing amazing about it.",neutral
+"The product is okay, fairly frustrating.",neutral
+"Great experience with this service, very standard!",positive
+"Not worth the money, very user-friendly.",negative
+"Decent service, but could be more amazing.",neutral
+"Great experience with this service, very standard!",positive
+"Terrible service, completely reliable.",negative
+"Highly recommend this, it’s reliable and works perfectly.",positive
+"The product is okay, fairly reliable.",neutral
+"Terrible service, completely user-friendly.",negative
+"Decent service, but could be more amazing.",neutral
+"Not worth the money, very poor.",negative
+"It works as expected, nothing poor about it.",neutral
+"Terrible service, completely amazing.",negative
+"Decent service, but could be more amazing.",neutral
+"Terrible service, completely average.",negative
+"Highly recommend this, it’s reliable and works perfectly.",positive
+"Highly recommend this, it’s user-friendly and works perfectly.",positive
+I love this product! It's absolutely user-friendly.,positive
+"Really disappointed with this, it’s poor.",negative
+"Really disappointed with this, it’s amazing.",negative
+"It works as expected, nothing amazing about it.",neutral
+"It works as expected, nothing standard about it.",neutral
+"Great experience with this service, very reliable!",positive
+"It works as expected, nothing frustrating about it.",neutral
+"The product is okay, fairly standard.",neutral
+"Really disappointed with this, it’s reliable.",negative
+"Not worth the money, very amazing.",negative
+"Decent service, but could be more frustrating.",neutral
+I love this product! It's absolutely poor.,positive
+"The product is okay, fairly amazing.",neutral
+I love this product! It's absolutely amazing.,positive
+I love this product! It's absolutely reliable.,positive
+"Great experience with this service, very poor!",positive
+"It works as expected, nothing poor about it.",neutral
+"Decent service, but could be more reliable.",neutral
+I love this product! It's absolutely frustrating.,positive
+"Decent service, but could be more reliable.",neutral
